@@ -16,7 +16,7 @@ Proses singkat:
 ## Preview Data
 
 Kamu bisa **preview data** secara interaktif melalui link berikut:
-[PMTiles Preview](https://pmtiles.io/#map=6.6/-5.93/108.492&inspectFeatures=true&showTileBoundaries=true)
+[PMTiles Preview](https://pmtiles.io/)
 
 ---
 
@@ -78,6 +78,8 @@ map.addLayer({
 ```
 
 3. Gunakan `feature.id` untuk interaksi (hover, click, feature state).
+
+**Lebih lengkapnya pergi [kesini](https://github.com/ngrhadi/indonesia-vector-tiles/tree/main/example)**
 
 ---
 
