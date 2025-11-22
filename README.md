@@ -2,7 +2,7 @@
 
 ## Deskripsi
 
-Data ini merupakan **vector tile** berbasis **PMTiles** untuk wilayah administrasi kabupaten/kota di Indonesia. Data dihasilkan dari **PostgreSQL/PostGIS** dan diproses menggunakan **Tippecanoe** untuk mengonversi subset GeoJSON menjadi PMTiles.
+Data ini merupakan **vector tile** berbasis **PMTiles** untuk wilayah administrasi kabupaten/kota di Indonesia. Sumber data diambil dari [BIG](https://tanahair.indonesia.go.id/portal-web/) pada Maret 2025. Proses data dimulai dari **PostgreSQL/PostGIS** dan lanjutkan menggunakan **Tippecanoe** untuk mengonversi subset GeoJSON menjadi PMTiles.
 
 Proses singkat:
 
