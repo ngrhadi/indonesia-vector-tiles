@@ -1,0 +1,60 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Maps PMTiles + Leaflet</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-hash@0.2.1/leaflet-hash.js"></script>
+
+    <!-- Gunakan versi ini -->
+    <script src="https://unpkg.com/protomaps-leaflet@5.1.0/dist/protomaps-leaflet.js"></script>
+
+    <style>
+        body, #map {
+            height:100vh;
+            margin:0;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <script>
+        const map = L.map('map');
+        new L.Hash(map);
+
+        // Jika tidak ada hash, set view awal
+        if (!window.location.hash) {
+            map.setView([0, 0], 2);
+        }
+
+        // ======================
+        // PMTiles LOCAL
+        // ======================
+        var layer = protomapsL.leafletLayer({
+            url: 'http://localhost:3000/11.pmtiles',     // file lokal
+            lang: 'en',
+            paintRules: [
+                {
+                    dataLayer: "11",
+                    symbolizer: new protomapsL.PolygonSymbolizer({
+                        fill: "#2196f355",
+                        stroke: "#ffffff",
+                        strokeWidth: 1
+                    })
+                },
+                {
+                    dataLayer: "11",
+                    symbolizer: new protomapsL.LineSymbolizer({
+                        stroke: "#000000",
+                        width: 2
+                    })
+                }
+            ],
+        });
+
+        layer.addTo(map);
+    </script>
+</body>
+</html>

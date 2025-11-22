@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maps PMTiles + Maplibre</title>
+    <link href='https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.css' rel='stylesheet' />
+    <style>
+        body, html { margin: 0; padding: 0; height: 100%; }
+        #map { width: 100%; height: 100%; }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script src='https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.js'></script>
+    <script src="https://unpkg.com/pmtiles@3.0.0/dist/index.js"></script>
+    <script>
+        const protocol = new pmtiles.Protocol();
+        maplibregl.addProtocol("pmtiles", protocol.tile);
+
+        // Demo display provinsi aceh
+        const pmtilesFile = "./11.pmtiles";
+
+        // Inisialisasi MapLibre dengan style dasar minimal
+        const map = new maplibregl.Map({
+            container: "map",
+            style: {
+                version: 8,
+                sources: {
+                    indonesia: {
+                        type: "vector",
+                        url: "pmtiles://" + pmtilesFile
+                    }
+                },
+                layers: [
+                    {
+                        id: "kabkot-fill",
+                        type: "fill",
+                        source: "indonesia",
+                        "source-layer": "11",
+                        paint: {
+                            "fill-color": "#3bb2d0",
+                            "fill-opacity": 0.4
+                        }
+                    },
+                    {
+                        id: "kabkot-outline",
+                        type: "line",
+                        source: "indonesia",
+                        "source-layer": "11",
+                        paint: {
+                            "line-color": "#003366",
+                            "line-width": 1.5
+                        }
+                    }
+                ]
+            },
+            center: [96.9, 4.4], // Aceh Tengah
+            zoom: 7
+        });
+    </script>
+</body>
+</html>

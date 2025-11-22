@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Maps PMTiles + Mapbox</title>
+
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js"></script>
+
+<!-- mapbox-pmtiles UMD -->
+<script src="https://cdn.jsdelivr.net/npm/mapbox-pmtiles@1/dist/mapbox-pmtiles.umd.js"></script>
+
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+</head>
+
+<body>
+<div id="map"></div>
+
+<script>
+    mapboxgl.accessToken = "your_access_token";
+
+    const map = new mapboxgl.Map({
+        container: 'map',
+        center: [96.8, 4.3],
+        style: {
+            version: 8,
+            sources: {},
+            layers: []
+        },
+        zoom: 7
+    });
+
+    // Register PMTiles source type
+    mapboxgl.Style.setSourceType(
+        mapboxPmTiles.SOURCE_TYPE,
+        mapboxPmTiles.PmTilesSource
+    );
+
+    map.on("load", () => {
+
+        const PMTILES_URL = "http://localhost:3000/11.pmtiles"; // pastikan kamu running di port 3000
+        // gunakan URL dari live server
+
+        map.addSource("aceh", {
+            type: mapboxPmTiles.SOURCE_TYPE,
+            url: PMTILES_URL,
+            maxzoom: 14
+        });
+
+        map.addLayer({
+            id: "aceh-fill",
+            source: "aceh",
+            "source-layer": "11",
+            type: "fill",
+            paint: {
+                "fill-color": "steelblue",
+                "fill-opacity": 0.4
+            }
+        });
+
+        map.addLayer({
+            id: "aceh-outline",
+            source: "aceh",
+            "source-layer": "11",
+            type: "line",
+            paint: {
+                "line-color": "#0044aa",
+                "line-width": 1.5
+            }
+        });
+
+    });
+</script>
+
+</body>
+</html>
